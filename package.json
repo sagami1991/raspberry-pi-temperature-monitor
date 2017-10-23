@@ -1,0 +1,26 @@
+{
+  "name": "temperature-monitor-pi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "launch-develop": "set NODE_ENV=develop&node ./build/app.js",
+    "launch-product": "node ./build/app.js",
+    "build-develop": "tsc -p ./ --watch",
+    "build-product": "cd ./client && npm i && npm build-product && cd ../ && npm i && tsc -p"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.16.5",
+    "@types/compression": "0.0.34",
+    "@types/express": "^4.0.37",
+    "typescript": "^2.5.3"
+  }
+}

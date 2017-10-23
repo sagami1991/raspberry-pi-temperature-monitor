@@ -1,0 +1,6 @@
+node_modules
+npm-debug.log
+/build
+/client/build/**/*.js
+/client/build/**/*.map
+/resources/temperature-24h.json

@@ -1,0 +1,48 @@
+body {
+    background-color: #eaf2f3;
+}
+
+canvas {
+    background-color: white;
+}
+
+.clock-panel {
+    margin-left: auto;
+    margin-right: 40px
+}
+
+.temperature-value.clock-value {
+    font-size: 16px;
+}
+.temperature-panel-container {
+    margin: 10px;
+    display: flex;
+}
+
+.temperature-panel {
+    background-color: white;
+    padding: 0 10px;
+    margin-right: 10px;
+}
+
+.temperature-title {
+    font-size: 24px;
+    padding: 8px 0 4px 0;
+    border-bottom: 2px solid rgb(216, 216, 216);
+}
+
+.temperature-value {
+    padding: 10px 0;
+    font-weight: 500;
+    font-size: 48px;
+    text-align: center;
+    justify-content: center;
+}
+
+.temperature-inner-value {
+    color: #ff6385;
+}
+
+.temperature-outer-value {
+    color: #33a3ec;
+}

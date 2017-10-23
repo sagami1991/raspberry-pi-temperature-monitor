@@ -54,8 +54,11 @@ import { TemperatureData } from "../../src/interfaces";
     const data = await xhrRequest<TemperatureData>("/api/temperature", "json");
     const dataForChart = convertData(data);
     chart.data.datasets![0].data = dataForChart;
-    const valueElement = <HTMLDivElement> document.querySelector("div.temperature-outer-value")!;
-    valueElement.innerText = `${getLastItem(data.data).value}℃`;
+    const valueElement = <HTMLDivElement> document.querySelector(".temperature-outer-value")!;
+    const clockElement = <HTMLDivElement> document.querySelector(".clock-value")!;
+    const lastItem = getLastItem(data.data);
+    valueElement.innerText = `${lastItem.value}℃`;
+    clockElement.innerText = new Date(lastItem.date).toLocaleString();
     chart.update();
 })();
 

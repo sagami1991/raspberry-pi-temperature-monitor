@@ -24,6 +24,16 @@ import { TemperatureData } from "../../src/interfaces";
         },
         options: {
             responsive: true,
+            tooltips: {
+                mode: "index",
+                intersect: false,
+                callbacks: {
+                    title: (tooltipItems, yData: Chart.ChartData) => {
+                        const chartPoint = <Chart.ChartPoint> yData.datasets![tooltipItems![0].datasetIndex!].data![tooltipItems![0].index!];
+                        return chartPoint.x!.toLocaleString();
+                    }
+                }
+            },
             scales: {
                 xAxes: [{
                     display: true,
@@ -34,7 +44,7 @@ import { TemperatureData } from "../../src/interfaces";
                     scaleLabel: {
                         display: true,
                         labelString: "時間"
-                    }
+                    },
                 }],
                 yAxes: [{
                     display: true,
@@ -56,9 +66,9 @@ import { TemperatureData } from "../../src/interfaces";
     chart.data.datasets![0].data = dataForChart;
     const valueElement = <HTMLDivElement> document.querySelector(".temperature-outer-value")!;
     const clockElement = <HTMLDivElement> document.querySelector(".clock-value")!;
-    const lastItem = getLastItem(data.data);
-    valueElement.innerText = `${lastItem.value}℃`;
-    clockElement.innerText = new Date(lastItem.date).toLocaleString();
+    const lastItem = getLastItem(dataForChart);
+    valueElement.innerText = `${lastItem.y}℃`;
+    clockElement.innerText = lastItem.x.toLocaleString();
     chart.update();
 })();
 
@@ -69,8 +79,8 @@ function getLastItem<T>(array: Array<T>) {
 function convertData(data: TemperatureData) {
     return data.data.map(item => {
         return {
-            x: item.date,
-            y: item.value
+            x: new Date(item.date),
+            y: Math.floor(item.value * 10) / 10
         };
     });
 }

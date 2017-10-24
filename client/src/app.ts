@@ -48,7 +48,7 @@ class Main {
                 ]
             },
             options: {
-                responsive: true,
+                responsive: false,
                 tooltips: {
                     mode: "index",
                     intersect: false,
@@ -66,9 +66,6 @@ class Main {
                         time: {
                             unit: "minute",
                             unitStepSize: 120,
-                        },
-                        scaleLabel: {
-                            display: true,
                         },
                         ticks: {
                             display: true,

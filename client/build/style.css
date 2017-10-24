@@ -5,14 +5,19 @@ body {
 
 canvas {
     background-color: white;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+    user-select: none;
+    margin: auto;
+    
 }
-
-.clock-panel {
-    margin-left: auto;
-    margin-right: 40px
+canvas {
+    height: 230px;
+}
+@media screen and (min-height: 400px) {
+  canvas {
+    height: auto;
+    width: 100%;
+    margin: auto;
+  }
 }
 
 .temperature-value.clock-value {
@@ -28,6 +33,7 @@ canvas {
     background-color: white;
     padding: 0 10px;
     margin-right: 10px;
+    width: 50%;
 }
 
 .temperature-panel:last-child {
@@ -42,11 +48,13 @@ canvas {
 }
 
 .temperature-value {
-    padding: 10px 0;
     font-weight: 500;
     font-size: 48px;
     text-align: center;
-    justify-content: center;
+}
+
+.clock-value {
+    padding-top: 10px;
 }
 
 .temperature-inner-value {

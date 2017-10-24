@@ -1,9 +1,13 @@
 body {
     background-color: #eaf2f3;
+    font-family: "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
 }
 
 canvas {
     background-color: white;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .clock-panel {
@@ -14,8 +18,9 @@ canvas {
 .temperature-value.clock-value {
     font-size: 16px;
 }
+
 .temperature-panel-container {
-    margin: 10px;
+    margin: 10px 0;
     display: flex;
 }
 
@@ -23,6 +28,10 @@ canvas {
     background-color: white;
     padding: 0 10px;
     margin-right: 10px;
+}
+
+.temperature-panel:last-child {
+    margin-right: 0px;
 }
 
 .temperature-title {

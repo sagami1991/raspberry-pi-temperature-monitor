@@ -21,7 +21,6 @@ class Main {
         const lastItem = getLastItem(dataForChart);
         valueElement.innerText = `${lastItem.y}℃`;
         clockElement.innerText = lastItem.x.toLocaleString();
-        this.chart.config.options!.scales!.xAxes![0].time!.min = <any> this.getYesterday();
         this.chart.update();
     }
 
@@ -64,11 +63,8 @@ class Main {
                         display: true,
                         type: "time",
                         time: {
-                            unit: "minute",
-                            unitStepSize: 120,
-                        },
-                        ticks: {
-                            display: true,
+                            unit: "hour",
+                            unitStepSize: 2
                         },
                     }],
                     yAxes: [{
@@ -86,13 +82,6 @@ class Main {
                 }
             }
         };
-    }
-
-    private getYesterday() {
-        const date = new Date();
-        date.setMinutes(0);
-        date.setDate(date.getDate() - 1);
-        return date;
     }
 }
 

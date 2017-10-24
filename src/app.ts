@@ -47,7 +47,7 @@ class Application {
         this.temperatureData.data.push(readData);
         const length = this.temperatureData.data.length;
         if (length > 6 * 24) {
-            this.temperatureData.data = this.temperatureData.data.slice(length - 144, length - 1);
+            this.temperatureData.data = this.temperatureData.data.slice(length - 144);
         }
         await FileUtil.writeFile(Settings.TEMPRETURE_JSON_FILE, JSON.stringify(this.temperatureData, null, 2));
     }

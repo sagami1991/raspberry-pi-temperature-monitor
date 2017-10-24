@@ -64,7 +64,7 @@ class Main {
                         type: "time",
                         time: {
                             unit: "minute",
-                            unitStepSize: 60,
+                            unitStepSize: 120,
                             min: <any> this.getYesterday()
                         },
                         scaleLabel: {

@@ -21,6 +21,7 @@ class Main {
         const lastItem = getLastItem(dataForChart);
         valueElement.innerText = `${lastItem.y}℃`;
         clockElement.innerText = lastItem.x.toLocaleString();
+        this.chart.config.options!.scales!.xAxes![0].time!.min = <any> this.getYesterday();
         this.chart.update();
     }
 
@@ -65,7 +66,6 @@ class Main {
                         time: {
                             unit: "minute",
                             unitStepSize: 120,
-                            min: <any> this.getYesterday()
                         },
                         scaleLabel: {
                             display: true,

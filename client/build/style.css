@@ -6,9 +6,9 @@ body {
 canvas {
     background-color: white;
     margin: auto;
-    height: 230px;
+    height: 350px;
 }
-@media screen and (min-height: 400px) {
+@media screen and (min-height: 500px) {
   canvas {
     height: auto;
     width: 100%;

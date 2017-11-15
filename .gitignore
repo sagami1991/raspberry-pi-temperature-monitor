@@ -4,3 +4,4 @@ npm-debug.log
 /client/build/**/*.js
 /client/build/**/*.map
 /resources/temperature-24h.json
+resources/sensor-24h.json

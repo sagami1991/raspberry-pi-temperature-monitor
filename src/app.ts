@@ -52,7 +52,7 @@ class Application {
         }, 10 * 60 * 1000);
 
         // 常に読み取ってないと正確な値がとれないので10秒ごとに行う
-        setInterval(async () => {
+        setInterval(() => {
             this.readAm2320Sensor();
         }, 10 * 1000);
     }
@@ -66,11 +66,13 @@ class Application {
             return;
         }
         return new Promise(resolve => {
-            exec("python ../python/humid-i2c.py", (err, stdout) => {
+            exec("python /home/pi/Programs/raspberry-pi-temperature-monitor/python/humid-i2c.py", (err, stdout) => {
                 if (err === null) {
                     this.am2320SensorData = JSON.parse(stdout);
-                    resolve();
+                } else {
+                    console.error(err.message);
                 }
+                resolve();
             });
         });
     }

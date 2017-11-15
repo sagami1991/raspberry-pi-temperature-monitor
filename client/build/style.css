@@ -16,10 +16,11 @@ canvas {
 }
 
 .temperature-value.clock-value {
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .temperature-panel-container {
+    width: 100%;
     margin: 10px 0;
     display: flex;
 }
@@ -28,7 +29,9 @@ canvas {
     background-color: white;
     padding: 0 10px;
     margin-right: 10px;
-    width: 50%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .temperature-panel:last-child {
@@ -44,18 +47,17 @@ canvas {
 
 .temperature-value {
     font-weight: 500;
-    font-size: 48px;
-    text-align: center;
+    font-size: 32px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.clock-value {
-    padding-top: 10px;
-}
-
-.temperature-inner-value {
-    color: #ff6385;
+.humidity-value {
+    color: #33a3ec;
 }
 
 .temperature-outer-value {
-    color: #33a3ec;
+    color: #ff6385;
 }

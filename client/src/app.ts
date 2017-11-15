@@ -1,5 +1,5 @@
 require("expose-loader?Chart!../node_modules/chart.js/dist/Chart.bundle.min.js");
-import { TemperatureData } from "../../src/interfaces";
+import { ISensorData } from "../../src/interfaces";
 
 class Main {
     private chart: Chart;
@@ -13,13 +13,17 @@ class Main {
     }
 
     private async updateChart() {
-        const data = await xhrRequest<TemperatureData>("/api/temperature", "json");
-        const dataForChart = convertData(data);
-        this.chart.data.datasets![0].data = dataForChart;
-        const valueElement = <HTMLDivElement> document.querySelector(".temperature-outer-value")!;
+        const data = await xhrRequest<ISensorData[]>("/api/temperature", "json");
+        const dataForTempChart = convertDataForChart(data, "tempreture");
+        const dataForHumidityChart = convertDataForChart(data, "humidity");
+        this.chart.data.datasets![0].data = dataForTempChart;
+        this.chart.data.datasets![1].data = dataForHumidityChart;
+        const temperatureValueElement = <HTMLDivElement> document.querySelector(".temperature-outer-value")!;
+        const humidityValueElement = <HTMLDivElement> document.querySelector(".humidity-value")!;
         const clockElement = <HTMLDivElement> document.querySelector(".clock-value")!;
-        const lastItem = getLastItem(dataForChart);
-        valueElement.innerText = `${lastItem.y}℃`;
+        const lastItem = getLastItem(dataForTempChart);
+        temperatureValueElement.innerText = `${lastItem.y}℃`;
+        humidityValueElement.innerText = `${getLastItem(dataForHumidityChart).y}％`;
         clockElement.innerText = lastItem.x.toLocaleString();
         this.chart.update();
     }
@@ -29,21 +33,24 @@ class Main {
             type: "line",
             data: {
                 datasets: [
-                    //     {
-                    //     label: "ケージ内温度",
-                    //     backgroundColor: "#ff6385",
-                    //     borderColor: "#ff6385",
-                    //     data: [65, 59, 80, 81, 56, 55, 40],
-                    //     fill: false,
-                    // },
                     {
-                        label: "ケージ外温度",
+                        label: "温度🌡️",
+                        backgroundColor: "#ff6385",
+                        borderColor: "#ff6385",
+                        data: [],
+                        fill: false,
+                        pointRadius: 0,
+                        yAxisID: "y-axis-1"
+                    },
+                    {
+                        label: "湿度💧",
                         backgroundColor: "#33a3ec",
                         borderColor: "#33a3ec",
                         data: [],
                         fill: false,
                         pointRadius: 0,
-                    }
+                        yAxisID: "y-axis-2"
+                    },
                 ]
             },
             options: {
@@ -67,18 +74,26 @@ class Main {
                             unitStepSize: 2
                         },
                     }],
-                    yAxes: [{
-                        display: true,
-                        scaleLabel: {
+                    yAxes: [
+                        {
+                            id: "y-axis-1",
                             display: true,
-                            labelString: "温度"
+                            scaleLabel: {
+                                display: true,
+                                labelString: "温度"
+                            },
+                            position: "left"
                         },
-                        // ticks: {
-                        //     display: true,
-                        //     max: 40,
-                        //     min: 10,
-                        // }
-                    }]
+                        {
+                            id: "y-axis-2",
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: "湿度"
+                            },
+                            position: "right",
+                        },
+                    ]
                 }
             }
         };
@@ -91,11 +106,11 @@ function getLastItem<T>(array: Array<T>) {
     return array[array.length - 1];
 }
 
-function convertData(data: TemperatureData) {
-    return data.data.map(item => {
+function convertDataForChart(data: ISensorData[], type: "tempreture" | "humidity") {
+    return data.map(item => {
         return {
-            x: new Date(item.date),
-            y: Math.floor(item.value * 10) / 10
+            x: new Date(item.updated),
+            y: type === "tempreture" ? Math.floor(item.innerTemperature * 10) / 10 : item.outerHumidity
         };
     });
 }

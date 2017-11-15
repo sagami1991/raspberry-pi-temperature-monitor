@@ -49,7 +49,7 @@ class Application {
     private registerIntervalTask() {
         setInterval(async () => {
             await this.saveTemperatureData();
-        }, 10 * 60 * 1000);
+        }, 5 * 60 * 1000);
 
         // 常に読み取ってないと正確な値がとれないので10秒ごとに行う
         setInterval(() => {
@@ -85,8 +85,8 @@ class Application {
             outerHumidity: this.am2320SensorData.humidity
         });
         const length = this.sensorsDataArray.length;
-        if (length > 6 * 24) {
-            this.sensorsDataArray = this.sensorsDataArray.slice(length - 144);
+        if (length > 12 * 24) {
+            this.sensorsDataArray = this.sensorsDataArray.slice(length - (12 * 24));
         }
         await FileUtil.writeFile(Settings.TEMPRETURE_JSON_FILE, JSON.stringify(this.sensorsDataArray, null, 2));
     }

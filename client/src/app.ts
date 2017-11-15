@@ -9,7 +9,7 @@ class Main {
         document.body.appendChild(canvas);
         this.chart = new window.Chart(ctx, this.getChartConfig());
         this.updateChart();
-        setInterval(() => this.updateChart(), 10 * 60 * 1000);
+        setInterval(() => this.updateChart(), 5 * 60 * 1000);
     }
 
     private async updateChart() {
@@ -80,7 +80,7 @@ class Main {
                             display: true,
                             scaleLabel: {
                                 display: true,
-                                labelString: "温度"
+                                labelString: "温度[℃]"
                             },
                             position: "left"
                         },
@@ -89,7 +89,7 @@ class Main {
                             display: true,
                             scaleLabel: {
                                 display: true,
-                                labelString: "湿度"
+                                labelString: "湿度[％]"
                             },
                             position: "right",
                         },

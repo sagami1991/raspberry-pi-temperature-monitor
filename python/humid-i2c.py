@@ -20,4 +20,4 @@ block = i2c.read_i2c_block_data(address,0,6)
 hum = float(block[2] << 8 | block[3])/10
 tmp = float(block[4] << 8 | block[5])/10
  
-print("{{ temperature: {0}, humidity: {1} }}".format(tmp, hum))
+print("{{ \"temperature\": {0}, \"humidity\": {1} }}".format(tmp, hum))

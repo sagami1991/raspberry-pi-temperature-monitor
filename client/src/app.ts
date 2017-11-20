@@ -114,7 +114,7 @@ function convertDataForChart(data: ISensorData[], type: "tempreture" | "humidity
             x: new Date(item.updated),
             y: type === "tempreture" ? roundNumber(item.innerTemperature) : item.outerHumidity
         };
-    });
+    }).filter(item => 0 < item.y && item.y < 100); // たまに1000を超える不具合対策
 }
 
 function roundNumber(num: number) {

@@ -58,6 +58,10 @@ canvas {
     color: #33a3ec;
 }
 
-.temperature-outer-value {
+.temperature-inner-value {
     color: #ff6385;
+}
+
+.temperature-outer-value {
+    color: #fa86ee;
 }

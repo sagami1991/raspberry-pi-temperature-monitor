@@ -18,13 +18,15 @@ class Main {
         const dataForHumidityChart = convertDataForChart(data, "humidity");
         this.chart.data.datasets![0].data = dataForTempChart;
         this.chart.data.datasets![1].data = dataForHumidityChart;
-        const temperatureValueElement = <HTMLDivElement> document.querySelector(".temperature-outer-value")!;
+        const innerTemperatureValueElement = <HTMLDivElement> document.querySelector(".temperature-inner-value")!;
+        const outerTemperatureValueElement = <HTMLDivElement> document.querySelector(".temperature-outer-value")!;
         const humidityValueElement = <HTMLDivElement> document.querySelector(".humidity-value")!;
         const clockElement = <HTMLDivElement> document.querySelector(".clock-value")!;
-        const lastItem = getLastItem(dataForTempChart);
-        temperatureValueElement.innerText = `${lastItem.y}℃`;
-        humidityValueElement.innerText = `${getLastItem(dataForHumidityChart).y}％`;
-        clockElement.innerText = lastItem.x.toLocaleString();
+        const lastItem = getLastItem(data);
+        innerTemperatureValueElement.innerText = `${roundNumber(lastItem.innerTemperature)}℃`;
+        outerTemperatureValueElement.innerText = `${lastItem.outerTemperature}℃`;
+        humidityValueElement.innerText = `${lastItem.outerHumidity}％`;
+        clockElement.innerText = new Date(lastItem.updated).toLocaleString();
         this.chart.update();
     }
 
@@ -110,9 +112,13 @@ function convertDataForChart(data: ISensorData[], type: "tempreture" | "humidity
     return data.map(item => {
         return {
             x: new Date(item.updated),
-            y: type === "tempreture" ? Math.floor(item.innerTemperature * 10) / 10 : item.outerHumidity
+            y: type === "tempreture" ? roundNumber(item.innerTemperature) : item.outerHumidity
         };
     });
+}
+
+function roundNumber(num: number) {
+    return Math.floor(num * 10) / 10;
 }
 
 function xhrRequest<T>(url: string, responseType: "json" | "") {

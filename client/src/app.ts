@@ -23,7 +23,7 @@ class Main {
         const humidityValueElement = <HTMLDivElement> document.querySelector(".humidity-value")!;
         const clockElement = <HTMLDivElement> document.querySelector(".clock-value")!;
         const lastItem = getLastItem(data);
-        innerTemperatureValueElement.innerText = `${roundNumber(lastItem.innerTemperature)}℃`;
+        // innerTemperatureValueElement.innerText = `${roundNumber(lastItem.innerTemperature)}℃`;
         outerTemperatureValueElement.innerText = `${lastItem.outerTemperature}℃`;
         humidityValueElement.innerText = `${lastItem.outerHumidity}％`;
         clockElement.innerText = new Date(lastItem.updated).toLocaleString();
@@ -36,9 +36,9 @@ class Main {
             data: {
                 datasets: [
                     {
-                        label: "温度🌡️",
-                        backgroundColor: "#ff6385",
-                        borderColor: "#ff6385",
+                        label: "気温(外)🌡️",
+                        backgroundColor: "#fa86ee",
+                        borderColor: "#fa86ee",
                         data: [],
                         fill: false,
                         pointRadius: 0,
@@ -112,7 +112,7 @@ function convertDataForChart(data: ISensorData[], type: "tempreture" | "humidity
     return data.map(item => {
         return {
             x: new Date(item.updated),
-            y: type === "tempreture" ? roundNumber(item.innerTemperature) : item.outerHumidity
+            y: type === "tempreture" ? item.outerTemperature : item.outerHumidity
         };
     }).filter(item => 0 < item.y && item.y < 100); // たまに1000を超える不具合対策
 }

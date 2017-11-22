@@ -91,13 +91,18 @@ class Application {
         await FileUtil.writeFile(Settings.TEMPRETURE_JSON_FILE, JSON.stringify(this.sensorsDataArray, null, 2));
     }
 
-    private async readDeviceData() {
-        const file = await FileUtil.readFile(Settings.TEMPRETURE_DEVICE_FILE);
-        const match = file.match(/t=([0-9]+)$/m);
-        if (match && match[1]) {
-            return Number(match[1]) / 1000;
+    private async readDeviceData(): Promise<number> {
+        try {
+            const file = await FileUtil.readFile(Settings.TEMPRETURE_DEVICE_FILE);
+            const match = file.match(/t=([0-9]+)$/m);
+            if (match && match[1]) {
+                return Number(match[1]) / 1000;
+            }
+            throw new Error("温度値が正規表現にヒットしませんでした");
+        } catch (error) {
+            console.error(error);
+            return -1;
         }
-        throw new Error("温度値が正規表現にヒットしませんでした");
     }
 
     private initializeRestApi(app: Express) {

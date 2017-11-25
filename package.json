@@ -7,8 +7,9 @@
     "launch-develop": "set NODE_ENV=develop&node ./build/app.js",
     "launch-product": "node ./build/app.js",
     "launch-forever": "forever start ./build/app.js",
+    "build": "tsc -p ./ --watch",
     "build-develop": "tsc -p ./ --watch",
-    "build-product": "cd ./client && npm i && npm run build-product && cd ../ && npm i && tsc -p ./"
+    "build-product": "cd ./client && npm run build-product && cd ../ && tsc -p ./"
   },
   "keywords": [],
   "author": "",

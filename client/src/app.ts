@@ -36,16 +36,16 @@ class Main {
             data: {
                 datasets: [
                     {
-                        label: "気温(外)🌡️",
-                        backgroundColor: "#fa86ee",
-                        borderColor: "#fa86ee",
+                        label: "気温A🌡️",
+                        backgroundColor: "#ff6385",
+                        borderColor: "#ff6385",
                         data: [],
                         fill: false,
                         pointRadius: 0,
                         yAxisID: "y-axis-1"
                     },
                     {
-                        label: "湿度💧",
+                        label: "湿度B💧",
                         backgroundColor: "#33a3ec",
                         borderColor: "#33a3ec",
                         data: [],
@@ -113,7 +113,7 @@ function convertDataForChart(data: ISensorData[], type: "tempreture" | "humidity
     return data.map(item => {
         return {
             x: new Date(item.updated),
-            y: type === "tempreture" ? item.outerTemperature : item.outerHumidity
+            y: type === "tempreture" ? roundNumber(item.innerTemperature) : item.outerHumidity
         };
     }).filter(item => 0 < item.y && item.y < 100); // たまに1000を超える不具合対策
 }

@@ -23,7 +23,7 @@ class Main {
         const humidityValueElement = <HTMLDivElement> document.querySelector(".humidity-value")!;
         const clockElement = <HTMLDivElement> document.querySelector(".clock-value")!;
         const lastItem = getLastItem(data);
-        // innerTemperatureValueElement.innerText = `${roundNumber(lastItem.innerTemperature)}℃`;
+        innerTemperatureValueElement.innerText = `${roundNumber(lastItem.innerTemperature)}℃`;
         outerTemperatureValueElement.innerText = `${lastItem.outerTemperature}℃`;
         humidityValueElement.innerText = `${lastItem.outerHumidity}％`;
         clockElement.innerText = new Date(lastItem.updated).toLocaleString();

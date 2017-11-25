@@ -8,7 +8,7 @@ import { exec } from "child_process";
 
 const PROFILE = process.env.NODE_ENV === "develop" ? "DEVELOP" : "PRODUCTION";
 const Settings = {
-    TEMPRETURE_DEVICE_FILE: PROFILE === "DEVELOP" ? __dirname + "/../resources/w1_slave" : "/sys/bus/w1/devices/28-031701f1e9ff/w1_slave",
+    TEMPRETURE_DEVICE_FILE: PROFILE === "DEVELOP" ? __dirname + "/../resources/w1_slave" : "/sys/bus/w1/devices/28-0000086e78fc/w1_slave",
     TEMPRETURE_JSON_FILE: __dirname + "/../resources/sensor-24h.json",
 };
 

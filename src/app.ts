@@ -65,16 +65,20 @@ class Application {
             };
             return;
         }
-        return new Promise(resolve => {
-            exec("python /home/pi/Programs/raspberry-pi-temperature-monitor/python/humid-i2c.py", (err, stdout) => {
-                if (err === null) {
-                    this.am2320SensorData = JSON.parse(stdout);
-                } else {
-                    console.error(err.message);
-                }
-                resolve();
-            });
-        });
+        this.am2320SensorData = {
+            temperature: -1,
+            humidity: -1
+        }
+        // return new Promise(resolve => {
+        //     exec("python /home/pi/Programs/raspberry-pi-temperature-monitor/python/humid-i2c.py", (err, stdout) => {
+        //         if (err === null) {
+        //             this.am2320SensorData = JSON.parse(stdout);
+        //         } else {
+        //             console.error(err.message);
+        //         }
+        //         resolve();
+        //     });
+        // });
     }
     private async saveTemperatureData() {
         const tempreture = await this.readDeviceData();

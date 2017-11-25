@@ -24,8 +24,8 @@ class Main {
         const clockElement = <HTMLDivElement> document.querySelector(".clock-value")!;
         const lastItem = getLastItem(data);
         innerTemperatureValueElement.innerText = `${roundNumber(lastItem.innerTemperature)}℃`;
-        outerTemperatureValueElement.innerText = `${lastItem.outerTemperature}℃`;
-        humidityValueElement.innerText = `${lastItem.outerHumidity}％`;
+        // outerTemperatureValueElement.innerText = `${lastItem.outerTemperature}℃`;
+        // humidityValueElement.innerText = `${lastItem.outerHumidity}％`;
         clockElement.innerText = new Date(lastItem.updated).toLocaleString();
         this.chart.update();
     }
@@ -51,7 +51,8 @@ class Main {
                         data: [],
                         fill: false,
                         pointRadius: 0,
-                        yAxisID: "y-axis-2"
+                        yAxisID: "y-axis-2",
+                        hidden: true
                     },
                 ]
             },
@@ -88,9 +89,9 @@ class Main {
                         },
                         {
                             id: "y-axis-2",
-                            display: true,
+                            display: false,
                             scaleLabel: {
-                                display: true,
+                                display: false,
                                 labelString: "湿度[％]"
                             },
                             position: "right",
